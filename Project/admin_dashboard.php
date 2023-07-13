@@ -90,7 +90,7 @@
             <img src="image/profile.png" alt="sidebar image" class="img-profile">
 
             <div class="sidebar__names">
-               <h3 class="sidebar__name">Admin: Khadiza Wassi</h3>
+               <h3 class="sidebar__name">Admin: Khadiza</h3>
             </div>
 
             <i class="ri-arrow-right-s-line"></i>

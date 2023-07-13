@@ -175,21 +175,20 @@ if (!isset($_SESSION['id'])) {
 
 
       </section>
-      <div>
+      <div id="btn-div">
          <button id="download-admit" type="submit" class="btn btn-primary" disabled>Download</button>
       </div>
    </main>
 
+   <!-- approve js -->
+   <script src="js/approve.js"></script>
+   <!-- get admit js -->
+   <script src="js/getAdmit.js"></script>
    <!-- js connect -->
    <script src="js/main.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
    <script src="http://cdn.jsdelivr.net/g/filesaver.js"></script>
-
-   <!-- get admit js -->
-   <script src="js/getAdmit.js"></script>
-   <!-- approve js -->
-   <script src="js/approve.js"></script>
    <script>
       console.log(document.getElementById('download-admit').disabled = false);
    </script>
