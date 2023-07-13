@@ -176,7 +176,7 @@ if (!isset($_SESSION['id'])) {
 
       </section>
       <div>
-         <button id="download-admit" type="submit" class="btn btn-primary">Download</button>
+         <button id="download-admit" type="submit" class="btn btn-primary" disabled>Download</button>
       </div>
    </main>
 
@@ -188,6 +188,11 @@ if (!isset($_SESSION['id'])) {
 
    <!-- get admit js -->
    <script src="js/getAdmit.js"></script>
+   <!-- approve js -->
+   <script src="js/approve.js"></script>
+   <script>
+      console.log(document.getElementById('download-admit').disabled = false);
+   </script>
 </body>
 
 </html>
