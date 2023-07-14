@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $successMassage = "Student added correctly";
 
-        // TO ALLOW USER TO REDIRECT TO INDEX.PHP FILE
+        // TO ALLOW USER TO REDIRECT TO view_student_info.PHP FILE
         header("location: /Project/view_stu_info.php");
         exit;
     } while (false);
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="sidebar__list">
 
-                    <a href="" class="sidebar__link">
+                    <a href="add_courses.php" class="sidebar__link">
                         <i class="ri-add-line"></i>
                         <span class="sidebar__link-name">Add Courses</span>
                         <span class="sidebar__link-floating">Add Courses</span>

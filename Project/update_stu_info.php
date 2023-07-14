@@ -1,94 +1,86 @@
 <?php
 include 'db.php';
 
-session_start();
-
-if (!isset($_SESSION['user_name'])) {
-    header('location:login.php');
-}
-
-
-### update Student Information
 
 $Name = "";
-$Stu_id = "";
-$Dept = "";
-$Batch = "";
-$Sec = "";
-$Credit = "";
-$Fee = "";
-
+$Email = "";
+$id = "";
+$section = "";
+$batch = "";
+$department = "";
+$birthdate = "";
+$password = "";
 
 $errorMassage = "";
 $successMassage = "";
 
-if( $_SERVER['REQUEST_METHOD'] == 'GET'){
-    //GET Method: Show the data of student
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    //GET Method: Show the data of the client
 
-    if(!isset($_GET["id"])){
-        header("location: /Project/view_stu_info.php");
+    if (!isset($_GET["id"])) {
+        header("location: admin_dashboard.php");
         exit;
     }
 
     $id = $_GET["id"];
 
-    $sql = "SELECT * FROM `info_form` WHERE id=$id";
+    $sql = "SELECT * FROM `register_form` WHERE id=$id";
 
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
-    if(!$row){
-        header("location: /Project/view_stu_info.php");
+    if (!$row) {
+        header("location: admin_dashboard.php");
         exit;
     }
 
     $Name = $row["name"]; //database row name
-    $Stu_id = $row["student_id"];
-    $Dept = $row["department"];
-    $Batch = $row["batch"];
-    $Sec = $row["sec"];
-    $Credit = $row["credit"];
-    $Fee = $row["fee"];
-
-
-}else{
+    $Email = $row["email"];
+    $id = $row["id"]; 
+    $section = $row["section"]; 
+    $batch = $row["batch"]; 
+    $department = $row["dept"]; 
+    $birthdate = $row["birthdate"]; 
+    $password = $row["password"]; 
+} else {
     //POST Method: Update the data of the client
 
-    $id = $_POST["id"];
     $Name = $_POST["name"];
-    $Stu_id = $_POST["student_id"];
-    $Dept = $_POST["department"];
-    $Batch = $_POST["batch"];
-    $Sec = $_POST["section"];
-    $Credit = $_POST["credit"];
-    $Fee = $_POST["fee"];
+    $Email = $_POST["email"];
+    $id = $_POST["id"];
+    $section = $_POST["section"];
+    $batch = $_POST["batch"];
+    $department = $_POST["dept_type"];
+    $birthdate = $_POST["birthdate"];
+    $password = $_POST["password"];
 
-    do{
-        if( empty($id) || empty($Name) || empty($Stu_id) || empty($Dept) || empty($Batch) || empty($Sec) || empty($Credit) || empty($Fee)){
-
+ 
+    do {
+        if (empty($Name) || empty($Email) || empty($id) || empty($section) || empty($batch)  || empty($birthdate) || empty($password)) {
+            
             $errorMassage = "All the fields are required";
             break;
         }
 
-        //Update
+        //Insert new client to database
 
-        $sql = "UPDATE `info_form`" . "SET `name`='$Name',`student_id`='$Stu_id',`department`='$Dept',`batch`='$Batch',`sec`='$Sec',`credit`='$Credit',`fee`='$Fee'" . " WHERE id = $id";
-
+        $sql = "UPDATE `register_form`" . "SET `name`= $Name',`email`='$Email',`id`='$id',`section`='$section',`batch`='$batch',`dept`='$department', `birthdate`='$birthdate',`password`='$password'" . "WHERE id = $id";
+        
 
         $result = $conn->query($sql);
 
-        if(!$result){
-            $errorMassage  = "Invalid Query: ". $conn->error;
+        if (!$result) {
+            $errorMassage  = "Invalid Query: " . $conn->error;
             break;
         }
-       
-        $successMassage = "Student updated correctly";
 
-        // TO ALLOW USER TO REDIRECT TO view_stu_info.php FILE
-        header("location: /Project/view_stu_info.php");
+        $successMassage = "Updated correctly";
+
+        // TO ALLOW USER TO REDIRECT TO I
+        header("location: admin_dashboard.php");
         exit;
 
-    }while(false);
+    } while (false);
 }
 ?>
 
@@ -133,7 +125,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET'){
                 <!-- =====Home==== -->
                 <div class="sidebar__list">
 
-                    <a href="student_dashboard.php" class="sidebar__link active-link">
+                    <a href="admin_dashboard.php" class="sidebar__link active-link">
                         <i class="ri-home-5-line"></i>
                         <span class="sidebar__link-name">Home</span>
                         <span class="sidebar__link-floating">Home</span>
@@ -150,32 +142,19 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET'){
                 <div class="sidebar__list">
 
                     <a href="add_stu_info.php" class="sidebar__link">
-                        <i class="ri-add-line"></i>
-                        <span class="sidebar__link-name">Add Info</span>
-                        <span class="sidebar__link-floating">Add Info</span>
+                        <i class="ri-user-add-line"></i>
+                        <span class="sidebar__link-name">Add Student</span>
+                        <span class="sidebar__link-floating">Add Student</span>
                     </a>
 
-                    <a href="view_stu_info.php" class="sidebar__link">
-                        <i class="ri-information-line"></i>
-                        <span class="sidebar__link-name">View Info</span>
-                        <span class="sidebar__link-floating">All Info</span>
-                    </a>
-                </div>
-
-
-                <h3 class="sidebar__title">
-                    <span>General</span>
-                </h3>
-
-                <div class="sidebar__list">
-                    <!-- Logout Button -->
                     <a href="logout.php" class="sidebar__link">
                         <i class="ri-logout-box-r-line"></i>
                         <span class="sidebar__link-name">Logout</span>
                         <span class="sidebar__link-floating">Logout</span>
                     </a>
-
                 </div>
+
+
 
             </div>
 
@@ -184,7 +163,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET'){
                 <img src="image/profile.png" alt="sidebar image" class="img-profile">
 
                 <div class="sidebar__names">
-                    <h3 class="sidebar__name"><span><?php echo $_SESSION['user_name'] ?></span></h3>
+                    <h3 class="sidebar__name">Admin: Khadiza</h3>
                 </div>
 
                 <i class="ri-arrow-right-s-line"></i>
@@ -199,105 +178,110 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET'){
 
 
         <div class="mb-5">
-            <h3>Update Information</h3>
+            <h3>Update Student Information</h3>
         </div>
 
-       
-        
+
         <?php
-            if(!empty($errorMassage)){
-                echo "
+        if (!empty($errorMassage)) {
+            echo "
                 <div class='alert alert-warning alert-dismissible fade show' role='alert'>
                 <strong>$errorMassage</strong>
                 <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                 </div>
                 ";
-            }
+        }
 
         ?>
 
+
         <form method="post">
-            
-            <input type="hidden" name = "id" value="<?php echo $id; ?>">
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Full Name</label>
+                <label class="col-sm-3 col-form-label">Name</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="name" value="<?php echo $Name; ?>">
+                    <input type="text" name="name" id="floatingName" class="form-control rounded-0 bg-light" value="<?php echo $Name; ?>">
                 </div>
             </div>
 
+
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Student ID</label>
+                <label class="col-sm-3 col-form-label">Email</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control" name="student_id" value="<?php echo $Stu_id; ?>">
+                    <input type="email" name="email" id="floatingInput" class="form-control rounded-0 bg-light" value="<?php echo $Email; ?>">
                 </div>
             </div>
 
+
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Department</label>
+                <label class="col-sm-3 col-form-label">ID</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="department" value="<?php echo $Dept; ?>">
+                    <input type="text" name="id" id="floatingName" class="form-control rounded-0 bg-light" value="<?php echo $id; ?>">
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Section</label>
+                <div class="col-sm-6">
+                    <input type="text" name="section" id="floatingName" class="form-control rounded-0 bg-light" value="<?php echo $section; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Batch</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="batch" value="<?php echo $Batch; ?>">
+                    <input type="text" name="batch" id="floatingName" class="form-control rounded-0 bg-light" value="<?php echo $batch; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Section</label>
+                <label class="col-sm-3 col-form-label">Department</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="section" value="<?php echo $Sec; ?>">
+                    <select name="dept_type" class="form-control rounded-0 bg-light" value="<?php echo $department; ?>">
+                        <option value="">Select Department</option>
+                        <option value="cse">CSE</option>
+                        <option value="eee">EEE</option>
+                        <option value="bba">BBA</option>
+                        <option value="law">Law</option>
+                        <option value="english">English</option>
+                        <option value="architecture">Architecture</option>
+                        <option value="Bangla">Bangla</option>
+                        <option value="civil">Civil Engineering</option>
+                    </select>
                 </div>
             </div>
+
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Total Credit</label>
+                <label class="col-sm-3 col-form-label">Birth Date</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="credit" value="<?php echo $Credit; ?>">
+                    <input type="date" name="birthdate" id="floatingInput" class="form-control rounded-0 bg-light" value="<?php echo $birthdate; ?>">
                 </div>
             </div>
+
 
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Total Fee</label>
+                <label class="col-sm-3 col-form-label">Password</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="fee" value="<?php echo $Fee; ?>">
+                    <input type="password" name="password" id="floatingPassword" class="form-control rounded-0 bg-light" value="<?php echo $password; ?>">
                 </div>
             </div>
 
-            <!-- Add php -->
-            <?php
 
-                    if(!empty($successMassage)){
-                         echo "
-                        <div class='row mb-3>
-                            <div class='offset-sm-3 col-sm-6'>
-                                <div class='alert alert-success alert-dismissible fade show'        role='alert'>
-                                <strong>$successMassage</strong>
-                                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                                </div>
-                            </div>
-                        </div>
-                         ";
-                     }
-                ?>
 
             <!-- Button -->
             <div class="row mb-3">
 
                 <div class="offset-sm-3 col-sm-3 d-grid">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </div>
 
                 <div class="col-sm-3 d-grid">
-                    <a class="btn btn-outline-primary" href="view_stu_info.php" role="button">Cancel</a>
+                    <a class="btn btn-outline-primary" href="admin_dashboard.php" role="button">Cancel</a>
                 </div>
-
             </div>
+
         </form>
 
     </main>

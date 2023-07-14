@@ -55,33 +55,20 @@
 
             <div class="sidebar__list">
 
-               <a href="#" class="sidebar__link">
+               <a href="add_stu_info.php" class="sidebar__link">
                   <i class="ri-user-add-line"></i>
-                  <span class="sidebar__link-name">Add User</span>
-                  <span class="sidebar__link-floating">Add User</span>
+                  <span class="sidebar__link-name">Add Student</span>
+                  <span class="sidebar__link-floating">Add Student</span>
                </a>
-
-               <a href="#" class="sidebar__link">
-                  <i class="ri-group-line"></i>
-                  <span class="sidebar__link-name">All User</span>
-                  <span class="sidebar__link-floating">All User</span>
-               </a>
-            </div>
-
-
-            <h3 class="sidebar__title">
-               <span>General</span>
-            </h3>
-
-            <div class="sidebar__list">
 
                <a href="logout.php" class="sidebar__link">
                   <i class="ri-logout-box-r-line"></i>
                   <span class="sidebar__link-name">Logout</span>
                   <span class="sidebar__link-floating">Logout</span>
                </a>
-
             </div>
+
+
 
          </div>
 
@@ -145,6 +132,9 @@
                   <td>$row[password]</td>
                   <td>
                      <button type='button' class='btn btn-primary btn-sm approve-btn'>Approve</button>
+                     
+                     <a class='btn btn-danger btn-sm' href='delete.php?id=$row[id]'><i class='ri-delete-bin-2-line'></i></a>
+                  
                   </td>
                </tr>
             ";
