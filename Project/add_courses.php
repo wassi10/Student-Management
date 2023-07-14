@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $successMassage = "Student added correctly";
 
         // TO ALLOW USER TO REDIRECT TO view_student_info.PHP FILE
-        header("location: /Project/view_stu_info.php");
+        header("location: view_stu_info.php");
         exit;
     } while (false);
 }

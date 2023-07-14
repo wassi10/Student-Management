@@ -29,6 +29,13 @@ if (!isset($_SESSION['id'])) {
    <link rel="stylesheet" href="style/sidebar.css">
 
    <title>View All Information</title>
+
+   <style>
+      .admit {
+         display: flex;
+         justify-content: space-between;
+      }
+   </style>
 </head>
 
 <body>
@@ -118,10 +125,27 @@ if (!isset($_SESSION['id'])) {
    <main class="main container" id="main">
 
       <section id="courses-table">
-         <div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt quaerat voluptatem nam, eius molestias nihil illo libero, dolorem labore officiis alias, tenetur suscipit provident perferendis aspernatur quos aut aliquam facere!</p>
+
+         <div class="card">
+
+            <div class="admit">
+               <div>
+                  <h3>Leading University <br> <br></h3>
+               </div>
+               <div>
+                  <h3>Admit Card</h3>
+               </div>
+            </div>
+
+            <div>
+               <p>Student Name: <?php echo $_SESSION['user_name'] ?> </p>
+               <p>Student ID: <?php echo $_SESSION['id'] ?></p>
+            </div>
+
          </div>
-         <div class="table-responsive">
+
+
+         <div>
 
             <table class="table table-bordered table-hover">
                <thead class="table-info">
