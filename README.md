@@ -9,3 +9,9 @@
 Student Course Registration Page. The page where they will register for courses.
 
 ![Screenshot (784)](https://github.com/wassi10/Student-Management/assets/91429665/8b8b79cd-f613-4d5d-99ff-f089aebf83ca)
+
+Student can download their admit card after admin approval.
+
+![Screenshot (785)](https://github.com/wassi10/Student-Management/assets/91429665/1b9aedb1-2c2d-4a9b-ba57-17c3e91e60b0)
+
+
