@@ -20,3 +20,4 @@ The administrator will approve students' admit cards and can register students, 
 ![Screenshot (786)](https://github.com/wassi10/Student-Management/assets/91429665/23781235-0fcd-412b-9c35-80f1700af647)
 ![Screenshot (787)](https://github.com/wassi10/Student-Management/assets/91429665/79346d0a-12a1-4cad-a604-0c9b32ade93c)
 ![Screenshot (788)](https://github.com/wassi10/Student-Management/assets/91429665/c4806e00-48bb-48dc-bd7c-540c5181110e)
+![Screenshot (789)](https://github.com/wassi10/Student-Management/assets/91429665/b12fc50a-5293-48c7-a4ce-0f28dbe0b0b2)
